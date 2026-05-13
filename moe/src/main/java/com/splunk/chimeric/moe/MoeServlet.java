@@ -1,4 +1,4 @@
-package com.splunk.chimeric.larry;
+package com.splunk.chimeric.moe;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class LarryServlet extends HttpServlet {
+public class MoeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/plain");
@@ -19,9 +19,9 @@ public class LarryServlet extends HttpServlet {
             return;
         }
 
-        try (InputStream input = getClass().getClassLoader().getResourceAsStream("larry.txt")) {
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream("moe.txt")) {
             if (input == null) {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Missing resource: larry.txt");
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Missing resource: moe.txt");
                 return;
             }
 

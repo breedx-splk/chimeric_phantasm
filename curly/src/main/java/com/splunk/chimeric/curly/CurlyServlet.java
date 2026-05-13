@@ -13,6 +13,12 @@ public class CurlyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/plain");
 
+        String requestPath = request.getRequestURI().substring(request.getContextPath().length());
+        if ("/nyuk".equals(requestPath)) {
+            response.getWriter().write("nyuk");
+            return;
+        }
+
         try (InputStream input = getClass().getClassLoader().getResourceAsStream("curly.txt")) {
             if (input == null) {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Missing resource: curly.txt");
