@@ -3,15 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
-    <display-name>moe</display-name>
+    <display-name>curly</display-name>
 
     <servlet>
-        <servlet-name>moe</servlet-name>
-        <servlet-class>com.splunk.chimeric.moe.MoeServlet</servlet-class>
+        <servlet-name>curly</servlet-name>
+        <servlet-class>com.splunk.chimeric.curly.CurlyServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>moe</servlet-name>
+        <servlet-name>curly</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 </web-app>
