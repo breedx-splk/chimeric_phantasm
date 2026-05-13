@@ -15,7 +15,7 @@ public class CurlyServlet extends HttpServlet {
 
         String requestPath = request.getRequestURI().substring(request.getContextPath().length());
         if ("/nyuk".equals(requestPath)) {
-            response.getWriter().write("nyuk");
+            handleNyuk(response);
             return;
         }
 
@@ -27,5 +27,9 @@ public class CurlyServlet extends HttpServlet {
 
             response.getWriter().write(new String(input.readAllBytes(), StandardCharsets.UTF_8));
         }
+    }
+
+    private void handleNyuk(HttpServletResponse response) throws IOException {
+        response.getWriter().write("nyuk");
     }
 }
