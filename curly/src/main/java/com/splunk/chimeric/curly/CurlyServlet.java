@@ -18,6 +18,10 @@ public class CurlyServlet extends HttpServlet {
             handleNyuk(response);
             return;
         }
+        if ("/sing".equals(requestPath)) {
+            handleSing(response);
+            return;
+        }
 
         try (InputStream input = getClass().getClassLoader().getResourceAsStream("curly.txt")) {
             if (input == null) {
@@ -31,5 +35,9 @@ public class CurlyServlet extends HttpServlet {
 
     private void handleNyuk(HttpServletResponse response) throws IOException {
         response.getWriter().write("nyuk");
+    }
+
+    private void handleSing(HttpServletResponse response) throws IOException {
+        response.getWriter().write("mice");
     }
 }

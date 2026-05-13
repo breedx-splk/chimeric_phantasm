@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class MoeServlet extends HttpServlet {
     private static final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
     private static final URI LARRY_NYUK_URI = URI.create("http://localhost:8080/larry/nyuk");
+    private static final URI LARRY_SING_URI = URI.create("http://localhost:8080/larry/sing");
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -23,6 +24,10 @@ public class MoeServlet extends HttpServlet {
         String requestPath = request.getRequestURI().substring(request.getContextPath().length());
         if ("/nyuk".equals(requestPath)) {
             handleNyuk(response);
+            return;
+        }
+        if ("/sing".equals(requestPath)) {
+            handleSing(response);
             return;
         }
 
@@ -50,6 +55,23 @@ public class MoeServlet extends HttpServlet {
             response.sendError(HttpServletResponse.SC_BAD_GATEWAY, "Interrupted calling larry /nyuk");
         } catch (IOException e) {
             response.sendError(HttpServletResponse.SC_BAD_GATEWAY, "Failed calling larry /nyuk");
+        }
+    }
+
+    private void handleSing(HttpServletResponse response) throws IOException {
+        HttpRequest larryRequest = HttpRequest.newBuilder(LARRY_SING_URI).GET().build();
+
+        try {
+            HttpResponse<String> larryResponse = HTTP_CLIENT.send(
+                    larryRequest,
+                    HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8)
+            );
+            response.getWriter().write("three " + larryResponse.body());
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            response.sendError(HttpServletResponse.SC_BAD_GATEWAY, "Interrupted calling larry /sing");
+        } catch (IOException e) {
+            response.sendError(HttpServletResponse.SC_BAD_GATEWAY, "Failed calling larry /sing");
         }
     }
 }
